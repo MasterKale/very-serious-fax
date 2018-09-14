@@ -8,17 +8,55 @@
 </head>
 <body>
   <a-scene>
+    <a-assets>
+      <img id="textureWob" src="assets/textures/wob.png">
+      <img id="textureBlur" src="assets/textures/blur.jpg">
+      <img id="backgroundSky" src="assets/textures/sechelt.jpg">
+      <audio src="assets/audio/lakenight.mp3" autoplay preload></audio>
+    </a-assets>
+
     <a-box
-      src="assets/textures/wob.png"
-      position="0 2 -5"
-      rotation="0 45 45"
-      scale="2 2 2"
+      src="#textureWob"
+      position="-10 2 -5"
+      rotation="0 0 45"
+      scale="2 0.5 3"
+      animation="property: position; to: 0 2.2 -5; dir: alternate; dur: 2000; loop: true;"
+      event-set__enter="_event: mouseenter; scale: 2.5 2.5 2.5"
+      event-set__leave="_event: mouseleave; scale: 2 2 2"
+      event-set__click="_event: click; animation__spin: property: rotation; to: 360 405 45; dur: 2000;"
     ></a-box>
 
-    <a-entity
+    <!-- <a-entity
       environment="preset: forest; dressingAmount: 500"
-    ></a-entity>
-    <a-camera>
+    ></a-entity> -->
+
+    <a-sky
+      src="#backgroundSky"
+    ></a-sky>
+
+    <a-plane
+      src="#textureBlur"
+      rotation="-90 0 0"
+      width="30"
+      height="30"
+    ></a-plane>
+
+    <a-light type="ambient" color="#445451"></a-light>
+    <a-light type="point" intensity="2" position="2 4 4"></a-light>
+
+    <a-text
+      value="Be Serious,\nnot solemn"
+      font="mozillavr"
+      width="20"
+      color="white"
+      position="-2.9 7.2 -3"
+      rotation="0 60 0"
+      scale="1.5 1.5 1.5"
+    ></a-text>
+
+    <a-camera
+      position="0 2 5"
+    >
       <a-cursor></a-cursor>
     </a-camera>
   </a-scene>

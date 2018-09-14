@@ -15,17 +15,24 @@ module.exports = {
       ]
   },
   plugins: [
+    // Clean dist/ on each build
     new CleanWebpackPlugin(['dist']),
+    // Inject compiled JS into <head> of HTML document
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'src/index.html',
         inject: 'head',
     }),
+    // Copy over static assets
     new CopyWebpackPlugin([
       {
         from: 'src/assets',
         to: 'assets',
       }
     ]),
-  ]
+  ],
+  devServer: {
+    clientLogLevel: 'info',
+    open: true,
+  },
 };
