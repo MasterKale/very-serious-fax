@@ -9,11 +9,38 @@
 <body>
   <a-scene>
     <a-assets>
+      <!-- <audio src="assets/audio/lakenight.mp3" autoplay preload loop></audio> -->
+
       <img id="textureWob" src="assets/textures/wob.png">
       <img id="textureBlur" src="assets/textures/blur.jpg">
-      <img id="backgroundSky" src="assets/textures/sechelt.jpg">
-      <audio src="assets/audio/lakenight.mp3" autoplay preload></audio>
+
+      <img id="sechelt" src="assets/textures/sechelt.jpg">
+      <img id="sechelt-thumb" src="assets/textures/thumb-sechelt.jpg">
+      <img id="city" src="assets/textures/city.jpg">
+      <img id="city-thumb" src="assets/textures/thumb-city.jpg">
+      <img id="cubes" src="assets/textures/cubes.jpg">
+      <img id="cubes-thumb" src="assets/textures/thumb-cubes.jpg">
+
+      <!-- Templates -->
+      <script id="plane" type="text/x-handlebars-template">
+        <a-entity
+          class="link"
+          geometry="primitive: plane; height: 1; width: 1;"
+          material="shader: flat; src: {{ thumb }};"
+          event-set__mousedown="scale: 1 1 1;"
+          event-set__mouseup="scale: 1.2 1.2 1;"
+          event-set__mouseenter="scale: 1.2 1.2 1;"
+          event-set__mouseleave="scale: 1 1 1;"
+          set-image="on: click; target: #skybox; src: {{ src }};"
+        ></a-entity>
+      </script>
+
     </a-assets>
+
+    <a-sky
+      id="skybox"
+      src="#sechelt"
+    ></a-sky>
 
     <a-box
       src="#textureWob"
@@ -21,25 +48,21 @@
       rotation="0 0 45"
       scale="2 0.5 3"
       animation="property: position; to: 0 2.2 -5; dir: alternate; dur: 2000; loop: true;"
-      event-set__enter="_event: mouseenter; scale: 2.5 2.5 2.5"
-      event-set__leave="_event: mouseleave; scale: 2 2 2"
-      event-set__click="_event: click; animation__spin: property: rotation; to: 360 405 45; dur: 2000;"
+      event-set__mouseenter="scale: 2.5 2.5 2.5"
+      event-set__mouseleave="scale: 2 2 2"
+      event-set__click="animation__spin: property: rotation; to: 360 405 45; dur: 2000;"
     ></a-box>
 
     <!-- <a-entity
       environment="preset: forest; dressingAmount: 500"
     ></a-entity> -->
 
-    <a-sky
-      src="#backgroundSky"
-    ></a-sky>
-
-    <a-plane
+    <!-- <a-plane
       src="#textureBlur"
       rotation="-90 0 0"
       width="30"
       height="30"
-    ></a-plane>
+    ></a-plane> -->
 
     <a-light type="ambient" color="#445451"></a-light>
     <a-light type="point" intensity="2" position="2 4 4"></a-light>
@@ -49,15 +72,31 @@
       font="mozillavr"
       width="20"
       color="white"
-      position="-2.9 7.2 -3"
-      rotation="0 60 0"
+      position="3.5 5.2 0"
+      rotation="0 -45 0"
       scale="1.5 1.5 1.5"
+      animation="property: scale; to: 1.5 2 1.5; dir: alternate; dur: 890; loop: true;"
     ></a-text>
+
+    <!-- 360 Image Gallery START -->
+
+    <a-entity id="links" layout="type: line; margin: 1.5" position="3 1 2" rotation="0 -45 0">
+      <a-entity template="src: #plane" data-thumb="#city-thumb" data-src="#city"></a-entity>
+      <a-entity template="src: #plane" data-thumb="#cubes-thumb" data-src="#cubes"></a-entity>
+      <a-entity template="src: #plane" data-thumb="#sechelt-thumb" data-src="#sechelt"></a-entity>
+    </a-entity>
+
+    <!-- 360 Image Gallery END -->
 
     <a-camera
       position="0 2 5"
     >
-      <a-cursor></a-cursor>
+      <a-cursor id="cursor">
+          <a-animation begin="click" easing="ease-in" attribute="scale"
+            fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+            from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+      </a-cursor>
     </a-camera>
   </a-scene>
 </body>
