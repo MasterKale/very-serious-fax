@@ -5,13 +5,42 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/main.js',
+  entry: {
+    // Global JS
+    main: './src/main.js',
+    // Page-specific JS
+    foo: './src/pages/foo/foo.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.[hash].js',
+    filename: '[name].[hash].js',
   },
   module: {
       rules: [
+        {
+          test: /\.html$/,
+          use: {
+            loader: 'html-loader',
+            options: {
+              attrs: [
+                'img:src',
+                'audio:src',
+              ],
+            }
+          }
+        },
+        {
+          test: /\.(jpe?g|png|mp3)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]?[hash:7]',
+                context: 'src',
+              },
+            },
+          ],
+        },
       ]
   },
   plugins: [
@@ -22,14 +51,15 @@ module.exports = {
         filename: 'index.html',
         template: 'src/index.html',
         inject: 'head',
+        chunks: ['main'],
     }),
-    // Copy over static assets
-    new CopyWebpackPlugin([
-      {
-        from: 'src/assets',
-        to: 'assets',
-      }
-    ]),
+    new HtmlWebpackPlugin({
+        filename: 'pages/foo/index.html',
+        template: 'src/pages/foo/index.html',
+        inject: 'head',
+        // Specify which JS files, defined as items in `entry`, should be injected into the page
+        chunks: ['foo'],
+    }),
   ],
   devServer: {
     clientLogLevel: 'info',
