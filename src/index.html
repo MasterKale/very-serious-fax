@@ -76,11 +76,12 @@
       rotation="0 -45 0"
       scale="1.5 1.5 1.5"
       animation="property: scale; to: 1.5 2 1.5; dir: alternate; dur: 890; loop: true;"
+      look-at="#camera"
     ></a-text>
 
     <!-- 360 Image Gallery START -->
 
-    <a-entity id="links" layout="type: line; margin: 1.5" position="3 1 2" rotation="0 -45 0">
+    <a-entity id="links" layout="type: line; margin: 1.5; align: center;" position="0 1 2" look-at="#camera">
       <a-entity template="src: #plane" data-thumb="#city-thumb" data-src="#city"></a-entity>
       <a-entity template="src: #plane" data-thumb="#cubes-thumb" data-src="#cubes"></a-entity>
       <a-entity template="src: #plane" data-thumb="#sechelt-thumb" data-src="#sechelt"></a-entity>
@@ -89,7 +90,9 @@
     <!-- 360 Image Gallery END -->
 
     <a-camera
+      id="camera"
       position="0 2 5"
+      fov="90"
     >
       <a-cursor id="cursor">
           <a-animation begin="click" easing="ease-in" attribute="scale"
