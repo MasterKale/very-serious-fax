@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -46,19 +45,22 @@ module.exports = {
   plugins: [
     // Clean dist/ on each build
     new CleanWebpackPlugin(['dist']),
-    // Inject compiled JS into <head> of HTML document
+    // Add additional HtmlWebpackPlugin entries to add additional HTML pages
     new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'src/index.html',
-        inject: 'head',
-        chunks: ['main'],
+      // Input
+      template: 'src/index.html',
+      // Output (within dist/)
+      filename: 'index.html',
+      // Inject compiled JS into <head>
+      inject: 'head',
+      // Specify which JS files, by key in `entry` above, should be injected into the page
+      chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
-        filename: 'pages/foo/index.html',
-        template: 'src/pages/foo/index.html',
-        inject: 'head',
-        // Specify which JS files, defined as items in `entry`, should be injected into the page
-        chunks: ['foo'],
+      filename: 'pages/foo/index.html',
+      template: 'src/pages/foo/index.html',
+      inject: 'head',
+      chunks: ['foo'],
     }),
   ],
   devServer: {
