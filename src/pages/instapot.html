@@ -9,14 +9,28 @@
 <body>
   <a-scene stats>
     <a-assets>
-
+      <img id="beach1" src="../assets/textures/beach1.jpg">
+      <img src="../assets/textures/beach1.jpg" alt="" id="water-normal">
+      <img src="../assets/textures/beach1.jpg" alt="" id="night-sphere">
     </a-assets>
 
     <a-sky
       color="grey"
     ></a-sky>
 
-    <a-cone radius-bottom="15" radius-top="0.9" position="3 0 0" color="red"></a-cone>
+    <a-cone
+      radius-bottom="15"
+      radius-top="15"
+      height="0.2"
+      position="3 0 0"
+      src="#beach1"
+      color="white"
+    ></a-cone>
+
+    <a-ocean-plane
+      material="normalMap: #water-normal; sphericalEnvMap: #night-sphere;"
+      position="0 0.05 0"
+    ></a-ocean-plane>
 
     <a-camera id="camera">
       <a-cursor></a-cursor>

@@ -8,3 +8,6 @@ require('aframe-look-at-component');
 
 // Components
 require('./components/set-image');
+
+// Shaders
+require('./shaders/shader-ocean');
