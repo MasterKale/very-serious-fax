@@ -57,10 +57,10 @@ module.exports = {
       chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
-      filename: 'pages/foo/index.html',
-      template: 'src/pages/foo/index.html',
+      filename: 'sandbox.html',
+      template: 'src/sandbox.html',
       inject: 'head',
-      chunks: ['foo'],
+      chunks: ['main'],
     }),
   ],
   devServer: {
