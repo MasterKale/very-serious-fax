@@ -5,23 +5,22 @@ AFRAME.registerComponent('set-image', {
     src: { type: 'string' },
     dur: { type: 'number', default: 300 },
   },
-  init: function () {
-    var data = this.data;
-    var el = this.el;
+  init() {
+    const { data, el } = this;
 
     this.setupFadeAnimation();
 
-    el.addEventListener(data.on, function () {
+    el.addEventListener(data.on, () => {
       data.target.emit('set-image-fade');
-      setTimeout(function () {
+      setTimeout(() => {
         data.target.setAttribute('material', 'src', data.src);
       }, data.dur);
     });
   },
-  setupFadeAnimation: function () {
+  setupFadeAnimation() {
     // Appends an animation that fades to black
-    var data = this.data;
-    var targetEl = this.data.target;
+    const { data } = this;
+    const targetEl = this.data.target;
 
     // Only set up once.
     if (targetEl.dataset.setImageFadeSetup) { return; }
