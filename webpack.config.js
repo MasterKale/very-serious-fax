@@ -12,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js',
+    publicPath: '/'
   },
   module: {
       rules: [
@@ -53,11 +54,17 @@ module.exports = {
       // Inject compiled JS into <head>
       inject: 'head',
       // Specify which JS files, by key in `entry` above, should be injected into the page
+      chunks: [],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'pages/sandbox.html',
+      template: 'src/pages/sandbox.html',
+      inject: 'head',
       chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
-      filename: 'sandbox.html',
-      template: 'src/sandbox.html',
+      filename: 'pages/instapot.html',
+      template: 'src/pages/instapot.html',
       inject: 'head',
       chunks: ['main'],
     }),
