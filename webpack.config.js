@@ -8,7 +8,6 @@ module.exports = {
     // Global JS
     main: './src/main.js',
     // Page-specific JS
-    foo: './src/pages/foo/foo.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
