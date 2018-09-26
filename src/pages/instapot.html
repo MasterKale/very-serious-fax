@@ -13,10 +13,12 @@
       <img id="map-water" src="../assets/textures/water.jpg">
       <img id="map-sky" src="../assets/textures/waterEnvMap.jpg">
       <img id="skybox" src="../assets/textures/skyboxOcean.jpg">
+      <img id="souls" src="../assets/textures/souls.png">
+      <img id="rei" src="../assets/textures/rei.png">
     </a-assets>
 
     <a-sky
-      src="#skybox"
+      color="black"
     ></a-sky>
 
     <a-cone
@@ -28,16 +30,22 @@
       material="color: lightblue"
     ></a-cone>
 
-    <a-box
-      color="orange"
-      position="-10 2 -5"
-      rotation="0 0 45"
-      scale="2 0.5 3"
-      animation="property: position; to: 0 2.2 -5; dir: alternate; dur: 2000; loop: true;"
-      event-set__mouseenter="scale: 2.5 2.5 2.5"
-      event-set__mouseleave="scale: 2 2 2"
-      event-set__click="animation__spin: property: rotation; to: 360 405 45; dur: 2000;"
-    ></a-box>
+    <a-plane
+      src="#souls"
+      material="alphaTest: 0.5"
+      width="200"
+      height="100"
+      position="0 50 -75"
+    ></a-plane>
+
+    <a-plane
+      src="#rei"
+      material="alphaTest: 0.5"
+      width="150"
+      height="100"
+      position="-75 50 75"
+      rotation="0 110 0"
+    ></a-plane>
 
     <a-ocean-plane
       material="normalMap: #beach1; sphericalEnvMap: #beach1; color: red;"
