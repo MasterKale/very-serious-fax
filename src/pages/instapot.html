@@ -15,7 +15,7 @@
     </a-assets>
 
     <a-sky
-      color="grey"
+      color="black"
     ></a-sky>
 
     <a-cone
@@ -26,6 +26,17 @@
       src="#beach1"
       color="white"
     ></a-cone>
+
+    <a-box
+      color="orange"
+      position="-10 2 -5"
+      rotation="0 0 45"
+      scale="2 0.5 3"
+      animation="property: position; to: 0 2.2 -5; dir: alternate; dur: 2000; loop: true;"
+      event-set__mouseenter="scale: 2.5 2.5 2.5"
+      event-set__mouseleave="scale: 2 2 2"
+      event-set__click="animation__spin: property: rotation; to: 360 405 45; dur: 2000;"
+    ></a-box>
 
     <a-ocean-plane
       material="normalMap: #water-normal; sphericalEnvMap: #night-sphere; color: red;"
